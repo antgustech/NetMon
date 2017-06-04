@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">NetMon</string>
+
+    <string name="running">Tjänsten körs</string>
+    <string name="notRunning">Tjänsten körs inte</string>
+    <string name="start">Starta</string>
+    <string name="stop">Stoppa</string>
+
+    <string name="networkChange">Nätverks anslutningen ändrades</string>
+
+    <string name="desc">När tjänsten körs kommer du få ett meddelande när WiFi anslutningen ändras.</string>
+
+</resources>

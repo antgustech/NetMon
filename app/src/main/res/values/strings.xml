@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">NetMon</string>
+
+    <string name="running">Service is running</string>
+    <string name="notRunning">Service is not running</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+
+    <string name="networkChange">Network connection changed</string>
+
+    <string name="desc">When the service is running, you will be notified when the WiFi connection changes.</string>
+
+</resources>
