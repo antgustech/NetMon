@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Vibrator;
 import android.widget.Toast;
 
 /**
@@ -24,7 +25,6 @@ public class NetworkMonitoringReceiver extends BroadcastReceiver {
      */
     @Override
     public void onReceive(Context context, Intent intent) {
-
       try{
           Thread.sleep(8000);
       }catch(Exception e){
@@ -36,7 +36,6 @@ public class NetworkMonitoringReceiver extends BroadcastReceiver {
                 AudioManager manager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
                 if(manager.isMusicActive())
                 {
-                    
                     Toast.makeText(context, context.getString(R.string.networkChange), Toast.LENGTH_LONG).show();
                 }
             }
@@ -55,7 +54,6 @@ public class NetworkMonitoringReceiver extends BroadcastReceiver {
             context.unregisterReceiver(this);
             registered = false;
         }
-
     }
 
     /**

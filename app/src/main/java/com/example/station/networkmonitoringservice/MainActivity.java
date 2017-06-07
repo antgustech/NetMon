@@ -16,6 +16,12 @@ import android.widget.ToggleButton;
  */
 public class MainActivity extends AppCompatActivity {
 
+    private ToggleButton btnStartStop;
+    private ImageView imgStatus;
+    private TextView txtStatus;
+    private Context ctx;
+
+
     /**
      * Setup the app.
      * @param savedInstanceState
@@ -24,11 +30,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ToggleButton btnStartStop = (ToggleButton) findViewById(R.id.btnStartStop);
-        final ImageView imgStatus = (ImageView) findViewById(R.id.imgStatus);
-        final TextView txtStatus = (TextView) findViewById(R.id.txtStatus);
-        final Context ctx = getApplicationContext();
+        initialize();
+        setListeners();
+    }
 
+    /**
+     * Initializes buttons and text elements by getting the old saved state.
+     */
+    private void initialize(){
+
+        btnStartStop = (ToggleButton) findViewById(R.id.btnStartStop);
+        imgStatus = (ImageView) findViewById(R.id.imgStatus);
+        txtStatus = (TextView) findViewById(R.id.txtStatus);
+        ctx = getApplicationContext();
         boolean registered = getState();
 
         if (registered) {
@@ -36,27 +50,29 @@ public class MainActivity extends AppCompatActivity {
             imgStatus.setImageResource(R.drawable.ic_done_white_24dp);
             imgStatus.setColorFilter(ContextCompat.getColor(ctx,R.color.green));
             btnStartStop.setChecked(false);
-
         } else {
             txtStatus.setText(getString(R.string.notRunning));
             imgStatus.setImageResource(R.drawable.ic_error_outline_white_24dp);
             imgStatus.setColorFilter(ContextCompat.getColor(ctx, R.color.red));
             btnStartStop.setChecked(true);
         }
+    }
 
+    /**
+     * Sets the listener for the button.
+     */
+    private void setListeners(){
         final NetworkMonitoringReceiver myReceiver = new NetworkMonitoringReceiver();
         btnStartStop.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 boolean registered = getState();
 
-                //Register the broadcast receiver.
                 if (registered) {
                     txtStatus.setText(getString(R.string.notRunning));
                     imgStatus.setImageResource(R.drawable.ic_error_outline_white_24dp);
                     imgStatus.setColorFilter(ContextCompat.getColor(ctx, R.color.red));
                     myReceiver.unregister(ctx);
                     changeState(false);
-                //Unregister it.
                 } else {
                     txtStatus.setText(getString(R.string.running));
                     imgStatus.setImageResource(R.drawable.ic_done_white_24dp);
